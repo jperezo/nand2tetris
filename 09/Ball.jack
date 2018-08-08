@@ -1,0 +1,84 @@
+class Ball 
+{
+   field int ballR; // Ball's r
+    field int ballX; // Ball's center (x, y)
+    field int ballY; 
+    field int ballSpeedX;   // Ball's speed for x and y
+    field int ballSpeedY;
+    field int BOX_WIDTH;
+    field int BOX_HEIGHT;   
+
+   constructor Ball new(){
+    let BOX_WIDTH = 511;
+    let BOX_HEIGHT = 255;
+
+    let ballR = 70; // Ball's radious
+    let ballX = ballR + 50; // Ball's center (x, y)
+    let ballY = ballR + 20; 
+    let ballSpeedX = 3;   // Ball's speed for x and y
+    let ballSpeedY = 2; 
+
+
+    do  Ball.setCircle(ballY, ballX, ballSpeedX, ballSpeedY, ballR, BOX_HEIGHT, BOX_WIDTH);
+    return this;
+   }
+
+   function void setCircle(int ballY, int ballX, int ballSpeedX, int ballSpeedY, int ballR, int BOX_HEIGHT, int BOX_WIDTH)
+   {        
+      var int ballx;
+      var int bally;
+      var String ballstring;
+      var String dot;
+      var String speedstring;
+
+      let ballx = ballX;
+      let bally = ballY;
+      let ballstring = " ball: " ;
+      let speedstring = " speed: " ;
+      let dot = "," ;
+
+        while(true)
+        {
+          let ballx = ballX;
+          let bally = ballY;
+           do Output.printString(ballstring);
+           do Output.printInt(ballx);
+           do Output.printString(dot);
+           do Output.printInt(bally);
+           do Output.printString(speedstring);
+           do Output.printInt(ballSpeedX);
+           do Output.printString(dot);
+           do Output.printInt(ballSpeedY);
+           do Output.moveCursor(0,1);
+
+           do Screen.setColor(true);
+           do Screen.drawCircle(ballX,ballY,ballR);
+           do Sys.wait(60);
+               let ballX = ballX + ballSpeedX;
+               let ballY = ballY + ballSpeedY;
+
+               // Check if the ball moves over the bounds
+               // If so, adjust the position and speed.
+               if (ballX - ballR < 0) {
+                  let ballSpeedX = -ballSpeedX; // Reflect along normal
+                  let ballX = ballR; // Re-position the ball at the edge
+               }
+               if (ballX + ballR > BOX_WIDTH) {
+                  let ballSpeedX = -ballSpeedX;
+                  let ballX = BOX_WIDTH - ballR;
+               }
+               if (ballY - ballR < 0) {
+                  let ballSpeedY = -ballSpeedY;
+                  let ballY = ballR;
+               }
+               if (ballY + ballR > BOX_HEIGHT) {
+                  let ballSpeedY = -ballSpeedY;
+                  let ballY = BOX_HEIGHT - ballR;
+               }
+
+
+               do Screen.clearScreen();
+    }
+    return;
+   }
+}

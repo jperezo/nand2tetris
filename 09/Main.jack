@@ -1,0 +1,9 @@
+class Main
+{
+    function void main()
+    {
+       var Ball ball;
+       let ball=Ball.new();
+        return;
+    }
+}
